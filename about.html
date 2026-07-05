@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Streams of Joy Owerri</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <style>
+        /* About page specific */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        .leader-section {
+            margin-top: 2.5rem;
+        }
+        .leader-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            letter-spacing: 0.03em;
+            font-size: 1.55rem;
+        }
+        .leader-list {
+            display: grid;
+            gap: 1.75rem;
+        }
+        .leader-card {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 1.25rem;
+            padding: 1.6rem;
+            border-radius: 24px;
+            background: var(--bg-color-light);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(15,23,42,0.06);
+            align-items: center;
+        }
+        .leader-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #e8f1ff 0%, #f8fbff 100%);
+            border: 1px solid rgba(15,23,42,0.05);
+            display: block;
+        }
+        .leader-meta h3 {
+            margin: 0 0 0.35rem 0;
+            font-size: 1.25rem;
+            line-height: 1.2;
+        }
+        .leader-role {
+            margin: 0 0 0.9rem 0;
+            color: var(--accent-color);
+            font-size: 0.96rem;
+            letter-spacing: 0.02em;
+        }
+        .leader-bio {
+            margin: 0;
+            color: var(--text-secondary);
+            line-height: 1.75;
+        }
+        .core-values {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: 0.75rem 1.25rem;
+        }
+        .landing-page .main-content {
+            margin-left: 0;
+            padding: 3rem 4rem;
+            max-width: 1200px;
+        }
+        @media (max-width: 900px) {
+            .landing-page .main-content {
+                padding: 2rem 1.25rem;
+            }
+            .leader-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .leader-photo {
+                width: 120px;
+                height: 120px;
+                margin: 0 auto;
+            }
+            .leader-meta {
+                align-items: center;
+            }
+            .core-values {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 650px) {
+            .landing-page .main-content {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="landing-page">
+    <header class="top-header">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <img src="assets/logo.png" alt="Streams of Joy Logo">
+                <span>Streams of Joy Owerri</span>
+            </a>
+            <ul class="navbar-links">
+                <li><a href="index.html" class="nav-link"><i class="ti ti-home"></i> Home</a></li>
+                <li><a href="archive.html" class="nav-link"><i class="ti ti-archive"></i> Service Archive</a></li>
+                <li><a href="give.html" class="nav-link"><i class="ti ti-heart-handshake"></i> Give Online</a></li>
+                <li><a href="about.html" class="nav-link"><i class="ti ti-file-text"></i> About</a></li>
+                <li><a href="contact.html" class="nav-link"><i class="ti ti-mail"></i> Contact Us</a></li>
+                <li><a href="#" id="btn-logout" class="nav-link"><i class="ti ti-logout"></i> Logout</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">About Streams of Joy Owerri</h1>
+                <p style="color: var(--text-secondary)">Welcome to Testimony House — Streams of Joy Owerri</p>
+            </div>
+        </div>
+
+        <section class="card">
+            <div class="about-grid">
+                <div>
+                    <h2>About Streams of Joy Owerri — Testimony House</h2>
+                    <p>Streams of Joy Owerri (affectionately known as Testimony House) is a vibrant expression of Streams of Joy International. We are a supernatural movement anchored on the prophetic mandate that "What God Cannot Do Does Not Exist!"</p>
+                    <p>At Testimony House, our atmosphere is continuously charged with the raw power of God, resulting in an endless influx of miracles, healings, and supernatural turnarounds. We are passionately dedicated to raising a generation of Christ-centered believers who are deeply rooted in prayer, active in faith, and fully equipped to walk in their divine destinies.</p>
+
+                    <h3 style="margin-top:1rem;">Our Core Values</h3>
+                    <div class="core-values" style="margin-top:0.5rem;">
+                        <div><strong>Prayer</strong><div style="color:var(--text-secondary);">Our foundational pillar, birthing global impact and the daily NSPPD movement.</div></div>
+                        <div><strong>Faith</strong><div style="color:var(--text-secondary);">We stand unshaken in the unlimited capacity of El-Roi to shatter protocols and alter realities.</div></div>
+                        <div><strong>Love & Community</strong><div style="color:var(--text-secondary);">We foster a loving, family-centric environment where every individual is valued, welcomed, and nurtured.</div></div>
+                        <div><strong>Excellence</strong><div style="color:var(--text-secondary);">We approach kingdom service with high standards of discipline, integrity, and honor.</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="leader-section">
+                <h3>Church Leadership</h3>
+                <div class="leader-list">
+                    <article class="leader-card">
+                        <img src="assets/pastor-jerry.jpg" onerror="this.src='assets/pastor-jerry.svg'" alt="Pastor Jerry Eze" class="leader-photo">
+                        <div class="leader-meta">
+                            <h3>Pastor Jerry Eze</h3>
+                            <p class="leader-role">Lead Pastor & Visionary, Streams of Joy International</p>
+                            <p class="leader-bio">Pastor Jerry Eze is the Apostolic Lead of Streams of Joy International and the visionary behind the global prayer movement, NSPPD. Driven by a profound burden for souls and a relentless passion to see God’s people walk in liberation, his ministry continues to impact millions around the globe through aggressive prophetic prayers, signs, and deep manifestations of the Holy Spirit.</p>
+                        </div>
+                    </article>
+
+                    <article class="leader-card">
+                        <img src="assets/pastor-uguru.jpg" onerror="this.src='assets/pastor-uguru.svg'" alt="Pastor Uguru Eme Uguru" class="leader-photo">
+                        <div class="leader-meta">
+                            <h3>Pastor Uguru Eme Uguru</h3>
+                            <p class="leader-role">Resident Pastor, Streams of Joy Owerri</p>
+                            <p class="leader-bio">Pastor Uguru serves dynamically as the Resident Pastor of Testimony House, Owerri. Working under the direct mantle and vision of the Lead Pastor, Pastor Uguru shepherds the Owerri local expression with immense grace, deep scriptural insight, and a fierce prayer fire. Known for his exceptional leadership and radical commitment to the flock, his ministry has made Owerri a true oasis of testimonies.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Set today's date automatically
+        try { document.getElementById('date').valueAsDate = new Date(); } catch(e){}
+    </script>
+</body>
+</html>

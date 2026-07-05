@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Archive - Streams of Joy Owerri</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <style>
+        .landing-page .main-content {
+            margin-left: 0;
+            padding: 3rem 4rem;
+            max-width: 1200px;
+        }
+        @media (max-width: 900px) {
+            .landing-page .main-content {
+                padding: 2rem 1.25rem;
+            }
+        }
+        @media (max-width: 650px) {
+            .landing-page .main-content {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="landing-page">
+    <header class="top-header">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <img src="assets/logo.png" alt="Streams of Joy Logo">
+                <span>Streams of Joy Owerri</span>
+            </a>
+            <ul class="navbar-links">
+                <li><a href="index.html" class="nav-link"><i class="ti ti-home"></i> Home</a></li>
+                <li><a href="archive.html" class="nav-link"><i class="ti ti-archive"></i> Service Archive</a></li>
+                <li><a href="give.html" class="nav-link"><i class="ti ti-heart-handshake"></i> Give Online</a></li>
+                <li><a href="about.html" class="nav-link"><i class="ti ti-file-text"></i> About</a></li>
+                <li><a href="contact.html" class="nav-link"><i class="ti ti-mail"></i> Contact Us</a></li>
+                <li><a href="#" id="btn-logout" class="nav-link"><i class="ti ti-logout"></i> Logout</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Service Archive</h1>
+                <p style="color: var(--text-secondary)">Official video archive from Streams of Joy Owerri on YouTube.</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div style="margin-bottom: 1.5rem;">
+                <h2 style="margin-bottom: 0.5rem;">YouTube Service Archive</h2>
+                <p style="color: var(--text-secondary); max-width: 820px;">Latest uploads from the official channel. Watch the playlist preview below or choose a recent service card.</p>
+            </div>
+            <div class="youtube-featured-player" aria-label="Streams of Joy Owerri YouTube playlist">
+                <iframe
+                    src="https://www.youtube.com/embed/videoseries?list=UU_7AVKwm-_1DafjOzffcCoQ"
+                    title="Streams of Joy Owerri video archive playlist"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+            <div id="youtube-archive-list" class="youtube-archive-grid"></div>
+            <div id="youtube-archive-status" style="margin-top: 1rem; color: var(--text-secondary);"></div>
+        </div>
+    </main>
+
+    <!-- Media Player Modal -->
+    <div class="modal-overlay" id="player-modal-overlay">
+        <div class="modal player-modal">
+            <div class="modal-header">
+                <span class="badge primary" id="player-badge">Media</span>
+                <button class="modal-close" id="player-close"><i class="ti ti-x"></i></button>
+            </div>
+            
+            <div class="player-content-wrapper">
+                <!-- Video Container -->
+                <div id="video-player-container" class="video-player-container">
+                    <!-- YouTube iframe injected dynamically -->
+                </div>
+                
+                <!-- Audio Container -->
+                <div id="audio-player-container" class="audio-player-container" style="display: none;">
+                    <div class="audio-deck">
+                        <div class="audio-info">
+                            <div class="audio-art">
+                                <i class="ti ti-headphones"></i>
+                            </div>
+                            <div class="audio-meta">
+                                <h3 id="audio-title">Service Title</h3>
+                                <p id="audio-preacher">Preacher</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Visualizer animation -->
+                        <div class="visualizer" id="audio-visualizer">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+
+                        <audio id="sermon-audio-element"></audio>
+                        
+                        <div class="audio-controls">
+                            <div class="playback-timeline">
+                                <span class="current-time" id="audio-current-time">0:00</span>
+                                <input type="range" id="audio-progress-slider" class="audio-progress-slider" min="0" max="100" value="0">
+                                <span class="duration" id="audio-duration">0:00</span>
+                            </div>
+                            
+                            <div class="control-row">
+                                <button class="btn btn-secondary control-btn" id="btn-audio-rewind" title="Rewind 10s"><i class="ti ti-player-skip-back"></i></button>
+                                <button class="btn btn-primary control-btn play-btn" id="btn-audio-play" title="Play"><i class="ti ti-player-play"></i></button>
+                                <button class="btn btn-secondary control-btn" id="btn-audio-forward" title="Forward 10s"><i class="ti ti-player-skip-forward"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="player-details">
+                    <h2 id="player-title" class="player-sermon-title">Entering Your Season of Exploits</h2>
+                    <div class="player-metadata">
+                        <span id="player-speaker"><i class="ti ti-user"></i> Pastor Uguru</span> &bull; 
+                        <span id="player-date"><i class="ti ti-calendar"></i> May 17, 2026</span> &bull; 
+                        <span id="player-service"><i class="ti ti-clock"></i> Sunday Service</span>
+                    </div>
+                    <p id="player-description" class="player-sermon-desc">Description of the service goes here.</p>
+                    <p class="player-video-link" id="player-video-link-container"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

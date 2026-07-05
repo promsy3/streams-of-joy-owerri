@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Give Online - Streams of Joy Owerri</title>
+    <meta name="description" content="Support the Streams of Joy Owerri ministry through your tithes, offerings, and building project contributions. Give online via bank transfer.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <style>
+        /* ── Give Page Specific Styles ── */
+        .give-hero {
+            background: linear-gradient(135deg, #0b63a6 0%, #064f8c 50%, #042d52 100%);
+            min-height: 340px;
+        }
+
+        .give-intro {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 3.5rem;
+        }
+
+        .give-intro h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .give-intro p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Payment cards grid */
+        .give-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .give-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.10);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+        }
+
+        .give-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.16);
+        }
+
+        /* Building Project card – UBA deep red */
+        .give-card.building {
+            background: linear-gradient(145deg, #b91c1c 0%, #7f1d1d 100%);
+            color: #fff;
+        }
+
+        /* Offering card – Zenith Bank dark red/maroon */
+        .give-card.offering {
+            background: linear-gradient(145deg, #991b1b 0%, #450a0a 100%);
+            color: #fff;
+        }
+
+        .give-card-inner {
+            padding: 2.2rem 2rem;
+        }
+
+        .give-card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 100px;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.4rem;
+        }
+
+        .give-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.7rem;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+
+        .give-card-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1.8rem;
+        }
+
+        .give-card-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 1.8rem;
+        }
+
+        .give-account-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            margin-bottom: 0.3rem;
+        }
+
+        .give-account-number {
+            font-size: 2.4rem;
+            font-family: 'DM Serif Display', serif;
+            letter-spacing: 2px;
+            color: #fff;
+            margin-bottom: 0.6rem;
+            line-height: 1;
+        }
+
+        .give-account-name {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-bottom: 1.6rem;
+        }
+
+        .give-bank-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .give-bank-icon {
+            font-size: 1.6rem;
+            opacity: 0.9;
+        }
+
+        .give-bank-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .give-bank-type {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .give-copy-btn {
+            width: 100%;
+            background: rgba(255,255,255,0.2);
+            border: 1.5px solid rgba(255,255,255,0.4);
+            color: #fff;
+            border-radius: 10px;
+            padding: 0.85rem 1.2rem;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: background 0.2s, border-color 0.2s;
+            min-height: 44px;
+        }
+
+        .give-copy-btn:hover {
+            background: rgba(255,255,255,0.32);
+            border-color: rgba(255,255,255,0.7);
+        }
+
+        .give-copy-btn.copied {
+            background: rgba(4, 120, 87, 0.5);
+            border-color: #34d399;
+        }
+
+        /* How-to section */
+        .give-how-section {
+            background: var(--bg-color-light);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .give-how-section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--accent-color);
+        }
+
+        .give-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .give-step {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .give-step-num {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .give-step-text strong {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        .give-step-text span {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        /* Scripture quote */
+        .give-scripture {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: linear-gradient(135deg, rgba(11,99,166,0.07), rgba(11,99,166,0.03));
+            border: 1px solid rgba(11,99,166,0.15);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .give-scripture blockquote {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        .give-scripture cite {
+            color: var(--accent-color);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+            .give-cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .give-account-number {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body class="landing-page">
+    <header class="top-header">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <img src="assets/logo.png" alt="Streams of Joy Logo">
+                <span>Streams of Joy Owerri</span>
+            </a>
+            <ul class="navbar-links">
+                <li><a href="index.html" class="nav-link"><i class="ti ti-home"></i> Home</a></li>
+                <li><a href="archive.html" class="nav-link"><i class="ti ti-archive"></i> Service Archive</a></li>
+                <li><a href="give.html" class="nav-link"><i class="ti ti-heart-handshake"></i> Give Online</a></li>
+                <li><a href="about.html" class="nav-link"><i class="ti ti-file-text"></i> About</a></li>
+                <li><a href="contact.html" class="nav-link"><i class="ti ti-mail"></i> Contact Us</a></li>
+                <li><a href="#" id="btn-logout" class="nav-link"><i class="ti ti-logout"></i> Logout</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero -->
+        <section class="hero-section give-hero">
+            <div class="hero-overlay"></div>
+            <h1 class="hero-title">Give Online</h1>
+            <p class="hero-subtitle">Streams of Joy Owerri &bull; Support the Vision</p>
+        </section>
+
+        <!-- Content -->
+        <section class="landing-section">
+
+            <div class="give-intro">
+                <h2>Sow a Seed, Fund a Vision</h2>
+                <p>
+                    Your generous giving fuels our worship services, outreach programs, and the ongoing building project.
+                    Every seed you plant is a partnership in the supernatural. Use the account details below to give via online transfer.
+                </p>
+            </div>
+
+            <!-- Payment Cards -->
+            <div class="give-cards-grid">
+
+                <!-- Building Project -->
+                <div class="give-card building">
+                    <div class="give-card-inner">
+                        <div class="give-card-badge">
+                            <i class="ti ti-building-church"></i> Priority
+                        </div>
+                        <h2 class="give-card-title">Building Project</h2>
+                        <p class="give-card-subtitle">Help us build a permanent home for God's presence in Owerri</p>
+                        <hr class="give-card-divider">
+
+                        <div class="give-account-label">Account Number</div>
+                        <div class="give-account-number" id="building-acct-num">1026212835</div>
+                        <div class="give-account-name">Streams of Joy International – Building Fund</div>
+
+                        <div class="give-bank-row">
+                            <i class="ti ti-building-bank give-bank-icon"></i>
+                            <div>
+                                <div class="give-bank-name">UBA</div>
+                                <div class="give-bank-type">United Bank for Africa</div>
+                            </div>
+                        </div>
+
+                        <button class="give-copy-btn" id="copy-building-btn" onclick="copyAccount('1026212835', 'copy-building-btn')">
+                            <i class="ti ti-copy"></i> Copy Account Number
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Church Offering -->
+                <div class="give-card offering">
+                    <div class="give-card-inner">
+                        <div class="give-card-badge">
+                            <i class="ti ti-heart"></i> Offering
+                        </div>
+                        <h2 class="give-card-title">Church Offering</h2>
+                        <p class="give-card-subtitle">Tithes, first fruits, love offerings and Sunday service gifts</p>
+                        <hr class="give-card-divider">
+
+                        <div class="give-account-label">Account Number</div>
+                        <div class="give-account-number" id="offering-acct-num">1015252242</div>
+                        <div class="give-account-name">Streams of Joy International – Owerri</div>
+
+                        <div class="give-bank-row">
+                            <i class="ti ti-building-bank give-bank-icon"></i>
+                            <div>
+                                <div class="give-bank-name">Zenith Bank</div>
+                                <div class="give-bank-type">Zenith Bank PLC</div>
+                            </div>
+                        </div>
+
+                        <button class="give-copy-btn" id="copy-offering-btn" onclick="copyAccount('1015252242', 'copy-offering-btn')">
+                            <i class="ti ti-copy"></i> Copy Account Number
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- How to Give -->
+            <div class="give-how-section">
+                <h2><i class="ti ti-info-circle"></i> How to Give via Online Transfer</h2>
+                <div class="give-steps">
+                    <div class="give-step">
+                        <div class="give-step-num">1</div>
+                        <div class="give-step-text">
+                            <strong>Open your banking app</strong>
+                            <span>Log in to your mobile banking app or USSD (*966# for Zenith, *919# for UBA).</span>
+                        </div>
+                    </div>
+                    <div class="give-step">
+                        <div class="give-step-num">2</div>
+                        <div class="give-step-text">
+                            <strong>Select "Transfer"</strong>
+                            <span>Choose "Other Banks" if you are transferring from a different bank.</span>
+                        </div>
+                    </div>
+                    <div class="give-step">
+                        <div class="give-step-num">3</div>
+                        <div class="give-step-text">
+                            <strong>Enter account details</strong>
+                            <span>Copy the account number above, select the correct bank and confirm the account name.</span>
+                        </div>
+                    </div>
+                    <div class="give-step">
+                        <div class="give-step-num">4</div>
+                        <div class="give-step-text">
+                            <strong>Enter amount & send</strong>
+                            <span>Input your gift amount, add a narration (e.g. "Offering"), then confirm and transfer.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scripture -->
+            <div class="give-scripture">
+                <blockquote>
+                    "Give, and it will be given to you. A good measure, pressed down, shaken together
+                    and running over, will be poured into your lap."
+                </blockquote>
+                <cite>— Luke 6:38 (NIV)</cite>
+            </div>
+
+        </section>
+
+        <footer class="landing-footer">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="ti ti-device-tv"></i> Streams of Joy Owerri</h3>
+                    <p>What God Cannot Do Does Not Exist!</p>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="ti ti-phone"></i> <a href="tel:+2348039708461">+234 803 970 8461</a> <span class="badge primary">Primary</span></p>
+                    <p><i class="ti ti-phone"></i> <a href="tel:+2348068712061">+234 806 871 2061</a> <span class="badge secondary">Secondary</span></p>
+                    <p><i class="ti ti-mail"></i> <a href="mailto:sojowerrisingles@gmail.com">sojowerrisingles@gmail.com</a> <span class="badge support">Support</span></p>
+                    <p><i class="ti ti-mail"></i> <a href="mailto:churchadmin@streamsofjoy.org">churchadmin@streamsofjoy.org</a> <span class="badge global">Owerri</span></p>
+                </div>
+                <div class="footer-address">
+                    <h4>Our Location</h4>
+                    <p><i class="ti ti-map-pin"></i> First Floor, Union Bank Building, Opposite Mann Street, Okigwe Road Roundabout, Government House Bus Stop, Owerri, Imo State.</p>
+                </div>
+                <div class="footer-social">
+                    <h4>Social Media</h4>
+                    <div class="social-links">
+                        <a href="https://web.facebook.com/STREAMSOFJOYOWERRI" target="_blank" rel="noreferrer noopener">Facebook</a>
+                        <a href="https://www.tiktok.com/@streamsofjoyowerri" target="_blank" rel="noreferrer noopener">TikTok</a>
+                        <a href="https://www.instagram.com/streamsofjoyowerri1" target="_blank" rel="noreferrer noopener">Instagram</a>
+                        <a href="https://t.me/streamsofjoyowerri17" target="_blank" rel="noreferrer noopener">Telegram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Streams of Joy Owerri. All Rights Reserved. | <a href="login.html">Admin Login</a> | <a href="contact.html">Contact Us</a></p>
+            </div>
+        </footer>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        function copyAccount(number, btnId) {
+            navigator.clipboard.writeText(number).then(() => {
+                const btn = document.getElementById(btnId);
+                if (!btn) return;
+                const original = btn.innerHTML;
+                btn.innerHTML = '<i class="ti ti-check"></i> Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                    btn.classList.remove('copied');
+                }, 2500);
+            }).catch(() => {
+                // Fallback for browsers without clipboard API
+                const el = document.createElement('textarea');
+                el.value = number;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                alert('Account number ' + number + ' copied!');
+            });
+        }
+    </script>
+</body>
+</html>
