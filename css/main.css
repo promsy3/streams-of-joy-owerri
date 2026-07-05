@@ -1099,3 +1099,235 @@ a:hover {
     min-height: unset;
 }
 
+/* ────────────────────────────────────────────────────────
+   NEW CHURCH FEATURES STYLES
+   ──────────────────────────────────────────────────────── */
+
+/* 1. Live Indicator Banner */
+.live-indicator-banner {
+    background-color: var(--danger-color);
+    color: white;
+    padding: 0.65rem 1.5rem;
+    text-align: center;
+    font-weight: 500;
+    display: none; /* Controlled by JS */
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    width: 100%;
+    z-index: 999;
+}
+
+.live-indicator-banner.active {
+    display: flex;
+    animation: slideDown 0.4s ease;
+}
+
+.live-indicator-banner a {
+    color: white;
+    text-decoration: underline;
+    font-weight: 700;
+    margin-left: 0.25rem;
+}
+
+.live-indicator-banner a:hover {
+    color: var(--bg-color-lighter);
+}
+
+.pulse-dot {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+/* 2. Upcoming Events Grid */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.event-card {
+    background: var(--bg-color-light);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.event-badge {
+    background-color: var(--bg-color-lighter);
+    color: var(--accent-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    align-self: flex-start;
+    margin-bottom: 1rem;
+}
+
+.event-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.event-meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.event-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.event-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+/* 3. Ministries Page Layout */
+.ministries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.ministry-card {
+    background: var(--bg-color-light);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.ministry-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(11, 99, 166, 0.06);
+    border-color: var(--accent-color);
+}
+
+.ministry-icon {
+    font-size: 2.2rem;
+    color: var(--accent-color);
+    margin-bottom: 1.25rem;
+    display: inline-block;
+}
+
+.ministry-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.ministry-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.ministry-meeting {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    background-color: var(--bg-color-lighter);
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    align-self: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+/* 4. Form Cards and Success state */
+.connect-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.form-card {
+    background: var(--bg-color-light);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.form-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.form-card > p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+}
+
+.success-message {
+    background-color: rgba(4, 120, 87, 0.1);
+    color: var(--success-color);
+    border: 1px solid rgba(4, 120, 87, 0.2);
+    padding: 1.25rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+

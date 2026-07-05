@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer & Testimonies - Streams of Joy Owerri</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+</head>
+<body class="landing-page">
+    <header class="top-header">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <img src="assets/logo.png" alt="Streams of Joy Logo">
+                <span>Streams of Joy Owerri</span>
+            </a>
+            <ul class="navbar-links">
+                <li><a href="index.html" class="nav-link"><i class="ti ti-home"></i> Home</a></li>
+                <li><a href="archive.html" class="nav-link"><i class="ti ti-archive"></i> Service Archive</a></li>
+                <li><a href="ministries.html" class="nav-link"><i class="ti ti-users"></i> Ministries</a></li>
+                <li><a href="give.html" class="nav-link"><i class="ti ti-heart-handshake"></i> Give Online</a></li>
+                <li><a href="pray.html" class="nav-link active"><i class="ti ti-flame"></i> Prayer & Testimonies</a></li>
+                <li><a href="about.html" class="nav-link"><i class="ti ti-file-text"></i> About</a></li>
+                <li><a href="contact.html" class="nav-link"><i class="ti ti-mail"></i> Contact Us</a></li>
+                <li><a href="#" id="btn-logout" class="nav-link"><i class="ti ti-logout"></i> Logout</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="live-indicator-banner" id="live-banner">
+        <span class="pulse-dot"></span>
+        <strong>🔴 LIVE NOW:</strong> We are currently broadcasting live!
+        <a href="archive.html">Join Service Now <i class="ti ti-arrow-right"></i></a>
+    </div>
+
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Prayer & Testimonies</h1>
+                <p style="color: var(--text-secondary)">Submit prayer requests and share your miracles. What God Cannot Do Does Not Exist!</p>
+            </div>
+        </div>
+
+        <section class="connect-grid" style="margin-bottom: 3rem;">
+            <!-- Prayer Request Form -->
+            <div class="form-card">
+                <h2><i class="ti ti-flame" style="color: var(--accent-color);"></i> Send Prayer Request</h2>
+                <p>Our prayer intercessors and pastors are standing by to pray with you. Let us agree in faith for your next season of breakthroughs.</p>
+                
+                <form id="prayer-form">
+                    <div class="form-group">
+                        <label for="prayer-name">Full Name</label>
+                        <input type="text" id="prayer-name" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prayer-email">Email Address</label>
+                        <input type="email" id="prayer-email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prayer-category">Prayer Category</label>
+                        <select id="prayer-category" class="form-control" style="background-color: var(--bg-color-light); border: 1px solid var(--border-color); width: 100%; border-radius: 8px; padding: 0.75rem;" required>
+                            <option value="" disabled selected>Select a category</option>
+                            <option value="Health & Healing">Health & Healing</option>
+                            <option value="Financial Breakthrough">Financial Breakthrough</option>
+                            <option value="Family & Marriage">Family & Marriage</option>
+                            <option value="Career & Business">Career & Business</option>
+                            <option value="Fruit of the Womb">Fruit of the Womb</option>
+                            <option value="Deliverance & Protection">Deliverance & Protection</option>
+                            <option value="Other">Other requests</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="prayer-request">Prayer Request Details</label>
+                        <textarea id="prayer-request" class="form-control" rows="5" style="width:100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem; font-family: var(--font-body);" placeholder="Write your prayer request here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Submit Request</button>
+                </form>
+            </div>
+
+            <!-- Testimony Form -->
+            <div class="form-card">
+                <h2><i class="ti ti-award" style="color: var(--success-color);"></i> Share Testimony</h2>
+                <p>Has God done something supernatural in your life? Share your testimony to encourage others and seal your miracle!</p>
+                
+                <form id="testimony-form">
+                    <div class="form-group">
+                        <label for="testimony-name">Full Name</label>
+                        <input type="text" id="testimony-name" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="testimony-email">Email Address</label>
+                        <input type="email" id="testimony-email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="testimony-title">Testimony Title</label>
+                        <input type="text" id="testimony-title" class="form-control" placeholder="e.g., Miraculous Healing, Supernatural Job" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="testimony-details">Testimony Details</label>
+                        <textarea id="testimony-details" class="form-control" rows="5" style="width:100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem; font-family: var(--font-body);" placeholder="Tell us what God did for you..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; background-color: var(--success-color); border-color: var(--success-color);">Share Testimony</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="landing-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3><i class="ti ti-device-tv"></i> Streams of Joy Owerri</h3>
+                <p>What God Cannot Do Does Not Exist!</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="ti ti-phone"></i> <a href="tel:+2348039708461">+234 803 970 8461</a></p>
+                <p><i class="ti ti-mail"></i> <a href="mailto:sojowerrisingles@gmail.com">sojowerrisingles@gmail.com</a></p>
+            </div>
+            <div class="footer-address">
+                <h4>Our Location</h4>
+                <p><i class="ti ti-map-pin"></i> First Floor, Union Bank Building, Opposite Mann Street, Okigwe Road Roundabout, Government House Bus Stop, Owerri, Imo State.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Streams of Joy Owerri. All Rights Reserved. | <a href="login.html">Admin Login</a> | <a href="contact.html">Contact Us</a></p>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

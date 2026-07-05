@@ -36,7 +36,12 @@ const App = {
             this.initArchive();
         } else if (path.endsWith('bulletin.html')) {
             this.initBulletin();
+        } else if (path.endsWith('pray.html')) {
+            this.initPrayPage();
         }
+
+        // Initialize Live stream indicator banner on all relevant pages
+        this.initLiveBroadcast();
     },
 
     checkAuth(path) {
@@ -764,6 +769,107 @@ const App = {
             
             doc.save('bulletin.pdf');
         });
+    },
+
+    // --- Live Broadcast banner ---
+    initLiveBroadcast() {
+        const banner = document.getElementById('live-banner');
+        if (!banner) return;
+
+        // Check if current day/time fits service hours to simulate "Live" status:
+        // - NSPPD: Mon-Fri between 7:00 AM and 9:00 AM (local time)
+        // - Sunday Services: Sun between 7:00 AM and 12:00 PM
+        const checkLiveStatus = () => {
+            const now = new Date();
+            const day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+            const hour = now.getHours();
+            const min = now.getMinutes();
+            const currentHourDecimal = hour + min / 60;
+
+            let isLive = false;
+
+            if (day >= 1 && day <= 5) {
+                // Mon-Fri NSPPD: 7 AM to 9 AM
+                if (currentHourDecimal >= 7.0 && currentHourDecimal <= 9.0) {
+                    isLive = true;
+                }
+            } else if (day === 0) {
+                // Sunday Services: 7 AM to 12 PM
+                if (currentHourDecimal >= 7.0 && currentHourDecimal <= 12.00) {
+                    isLive = true;
+                }
+            }
+
+            if (isLive) {
+                banner.classList.add('active');
+            } else {
+                banner.classList.remove('active');
+            }
+        };
+
+        // Run check immediately and then every minute
+        checkLiveStatus();
+        setInterval(checkLiveStatus, 60000);
+    },
+
+    // --- Prayer & Testimony Submission ---
+    initPrayPage() {
+        const prayerForm = document.getElementById('prayer-form');
+        const testimonyForm = document.getElementById('testimony-form');
+
+        if (prayerForm) {
+            prayerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('prayer-name').value;
+                const email = document.getElementById('prayer-email').value;
+                const category = document.getElementById('prayer-category').value;
+                const request = document.getElementById('prayer-request').value;
+
+                // Save to local storage mock database
+                const submissions = JSON.parse(localStorage.getItem('prayerRequests') || '[]');
+                submissions.push({ id: Date.now(), name, email, category, request, date: new Date().toISOString() });
+                localStorage.setItem('prayerRequests', JSON.stringify(submissions));
+
+                // Show success alert
+                const msg = document.createElement('div');
+                msg.className = 'success-message';
+                msg.innerHTML = '<i class="ti ti-circle-check"></i> Thank you! Your prayer request has been received. Our prayer team is standing with you.';
+                prayerForm.prepend(msg);
+
+                // Reset form
+                prayerForm.reset();
+
+                // Clear success message after 5 seconds
+                setTimeout(() => msg.remove(), 5000);
+            });
+        }
+
+        if (testimonyForm) {
+            testimonyForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('testimony-name').value;
+                const email = document.getElementById('testimony-email').value;
+                const title = document.getElementById('testimony-title').value;
+                const details = document.getElementById('testimony-details').value;
+
+                // Save to local storage mock database
+                const submissions = JSON.parse(localStorage.getItem('testimonies') || '[]');
+                submissions.push({ id: Date.now(), name, email, title, details, date: new Date().toISOString() });
+                localStorage.setItem('testimonies', JSON.stringify(submissions));
+
+                // Show success alert
+                const msg = document.createElement('div');
+                msg.className = 'success-message';
+                msg.innerHTML = '<i class="ti ti-circle-check"></i> Glory to God! Your testimony has been submitted. What God cannot do does not exist!';
+                testimonyForm.prepend(msg);
+
+                // Reset form
+                testimonyForm.reset();
+
+                // Clear success message after 5 seconds
+                setTimeout(() => msg.remove(), 5000);
+            });
+        }
     },
 
 };
