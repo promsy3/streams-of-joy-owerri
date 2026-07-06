@@ -1105,9 +1105,8 @@ a:hover {
 
 /* 1. Live Indicator Banner */
 .live-indicator-banner {
-    background-color: var(--danger-color);
     color: white;
-    padding: 0.65rem 1.5rem;
+    padding: 0.6rem 1.5rem;
     text-align: center;
     font-weight: 500;
     display: none; /* Controlled by JS */
@@ -1117,10 +1116,18 @@ a:hover {
     font-size: 0.95rem;
     width: 100%;
     z-index: 999;
+    transition: background-color 0.4s ease;
 }
 
-.live-indicator-banner.active {
+.live-indicator-banner.live-on {
     display: flex;
+    background-color: #b91c1c;
+    animation: slideDown 0.4s ease;
+}
+
+.live-indicator-banner.live-off {
+    display: flex;
+    background-color: #334155;
     animation: slideDown 0.4s ease;
 }
 
@@ -1143,6 +1150,14 @@ a:hover {
     display: inline-block;
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
     animation: pulse 1.5s infinite;
+}
+
+.static-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #94a3b8;
+    border-radius: 50%;
+    display: inline-block;
 }
 
 @keyframes pulse {

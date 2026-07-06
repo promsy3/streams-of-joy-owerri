@@ -771,45 +771,58 @@ const App = {
         });
     },
 
-    // --- Live Broadcast banner ---
-    initLiveBroadcast() {
+    // --- Live Broadcast banner (YouTube API) ---
+    async initLiveBroadcast() {
         const banner = document.getElementById('live-banner');
         if (!banner) return;
 
-        // Check if current day/time fits service hours to simulate "Live" status:
-        // - NSPPD: Mon-Fri between 7:00 AM and 9:00 AM (local time)
-        // - Sunday Services: Sun between 7:00 AM and 12:00 PM
-        const checkLiveStatus = () => {
-            const now = new Date();
-            const day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-            const hour = now.getHours();
-            const min = now.getMinutes();
-            const currentHourDecimal = hour + min / 60;
-
-            let isLive = false;
-
-            if (day >= 1 && day <= 5) {
-                // Mon-Fri NSPPD: 7 AM to 9 AM
-                if (currentHourDecimal >= 7.0 && currentHourDecimal <= 9.0) {
-                    isLive = true;
-                }
-            } else if (day === 0) {
-                // Sunday Services: 7 AM to 12 PM
-                if (currentHourDecimal >= 7.0 && currentHourDecimal <= 12.00) {
-                    isLive = true;
-                }
+        const checkYouTubeLive = async () => {
+            // If no API key is set, hide the banner silently
+            if (!YOUTUBE_API_KEY || YOUTUBE_API_KEY === 'YOUR_YOUTUBE_API_KEY') {
+                banner.classList.remove('live-on', 'live-off');
+                return;
             }
 
-            if (isLive) {
-                banner.classList.add('active');
-            } else {
-                banner.classList.remove('active');
+            try {
+                const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YOUTUBE_CHANNEL_ID}&type=video&eventType=live&key=${YOUTUBE_API_KEY}`;
+                const response = await fetch(url);
+
+                if (!response.ok) throw new Error('YouTube API error');
+
+                const data = await response.json();
+                const liveItems = data.items || [];
+
+                banner.classList.remove('live-on', 'live-off');
+
+                if (liveItems.length > 0) {
+                    // Channel IS live — get the video ID for a direct link
+                    const videoId = liveItems[0].id.videoId;
+                    const liveUrl = `https://www.youtube.com/watch?v=${videoId}`;
+                    banner.innerHTML = `
+                        <span class="pulse-dot"></span>
+                        <strong>🔴 LIVE NOW:</strong> Streams of Joy Owerri is broadcasting live on YouTube!
+                        <a href="${liveUrl}" target="_blank" rel="noopener noreferrer">Watch Live <i class="ti ti-arrow-right"></i></a>
+                    `;
+                    banner.classList.add('live-on');
+                } else {
+                    // Channel is NOT live
+                    const channelUrl = `https://www.youtube.com/@streamsofjoyowerri`;
+                    banner.innerHTML = `
+                        <span class="static-dot"></span>
+                        <span>📺 Not Currently Live &mdash; Watch our latest service recordings on <a href="${channelUrl}" target="_blank" rel="noopener noreferrer">YouTube</a></span>
+                    `;
+                    banner.classList.add('live-off');
+                }
+            } catch (error) {
+                // Silently fail if API is unavailable — don't break the page
+                console.warn('Live status check failed:', error);
+                banner.classList.remove('live-on', 'live-off');
             }
         };
 
-        // Run check immediately and then every minute
-        checkLiveStatus();
-        setInterval(checkLiveStatus, 60000);
+        // Check immediately, then every 5 minutes
+        await checkYouTubeLive();
+        setInterval(checkYouTubeLive, 5 * 60 * 1000);
     },
 
     // --- Prayer & Testimony Submission ---

@@ -3,6 +3,13 @@ const USE_SUPABASE = false; // Toggle this to true and fill in details to use Su
 const SUPABASE_URL = 'YOUR_SUPABASE_URL';
 const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY';
 
+// YouTube Live Check Configuration
+// 👇 Add your YouTube Data API v3 key here to enable real-time live detection.
+// Get a free key at: https://console.cloud.google.com/apis/library/youtube.googleapis.com
+const YOUTUBE_API_KEY = 'YOUR_YOUTUBE_API_KEY';
+const YOUTUBE_CHANNEL_ID = 'UC_7AVKwm-_1DafjOzffcCoQ'; // Streams of Joy Owerri channel
+
+
 // Utility for UUID generation (mocking a DB ID)
 function generateId() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
