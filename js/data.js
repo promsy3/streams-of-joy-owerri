@@ -6,7 +6,7 @@ const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY';
 // YouTube Live Check Configuration
 // 👇 Add your YouTube Data API v3 key here to enable real-time live detection.
 // Get a free key at: https://console.cloud.google.com/apis/library/youtube.googleapis.com
-const YOUTUBE_API_KEY = 'YOUR_YOUTUBE_API_KEY';
+const YOUTUBE_API_KEY = 'AIzaSyA_so-3AU6nOGZFy2Y0nQceR6LgvNkRB1s';
 const YOUTUBE_CHANNEL_ID = 'UC_7AVKwm-_1DafjOzffcCoQ'; // Streams of Joy Owerri channel
 
 
