@@ -188,13 +188,13 @@ const App = {
 
         try {
             // Fetch directly from YouTube API since Vercel API might not be running locally
-            if (!window.YOUTUBE_API_KEY || window.YOUTUBE_API_KEY === 'YOUR_YOUTUBE_API_KEY') {
+            if (typeof YOUTUBE_API_KEY === 'undefined' || !YOUTUBE_API_KEY || YOUTUBE_API_KEY === 'YOUR_YOUTUBE_API_KEY') {
                 throw new Error('YOUTUBE_API_KEY is missing or invalid in data.js');
             }
 
-            const channelId = window.YOUTUBE_CHANNEL_ID || 'UC_7AVKwm-_1DafjOzffcCoQ';
+            const channelId = (typeof YOUTUBE_CHANNEL_ID !== 'undefined') ? YOUTUBE_CHANNEL_ID : 'UC_7AVKwm-_1DafjOzffcCoQ';
             const playlistId = `UU${channelId.slice(2)}`;
-            const ytApiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=6&key=${window.YOUTUBE_API_KEY}`;
+            const ytApiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=6&key=${YOUTUBE_API_KEY}`;
 
             const response = await fetch(ytApiUrl);
             if (!response.ok) throw new Error(`YouTube API returned ${response.status}`);
