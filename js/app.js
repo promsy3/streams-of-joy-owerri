@@ -30,13 +30,14 @@ const App = {
         }
 
         // Page specific initialization
-        if (path.endsWith('/') || path.endsWith('index.html') || path.endsWith('contact.html')) {
+        // Support Vercel clean URLs (paths without .html)
+        if (path === '/' || path.endsWith('index.html') || path.endsWith('index') || path.endsWith('contact.html') || path.endsWith('contact')) {
             this.initLanding();
-        } else if (path.endsWith('archive.html')) {
+        } else if (path.endsWith('archive.html') || path.endsWith('archive')) {
             this.initArchive();
-        } else if (path.endsWith('bulletin.html')) {
+        } else if (path.endsWith('bulletin.html') || path.endsWith('bulletin')) {
             this.initBulletin();
-        } else if (path.endsWith('pray.html')) {
+        } else if (path.endsWith('pray.html') || path.endsWith('pray')) {
             this.initPrayPage();
         }
 
@@ -171,7 +172,8 @@ const App = {
         const cachedTime = localStorage.getItem('youtubeArchiveFetchedAt');
         const now = Date.now();
 
-        if (!force && cached && cachedTime && (now - parseInt(cachedTime, 10) < 3600000)) {
+        // Check cache (auto update every 5 minutes / 300,000 ms)
+        if (!force && cached && cachedTime && (now - parseInt(cachedTime, 10) < 300000)) {
             const items = JSON.parse(cached);
             // If cached items are missing videoId (old format before thumbnail fix),
             // force a fresh fetch so thumbnails are built correctly.
