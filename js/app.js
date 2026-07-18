@@ -196,7 +196,7 @@ const App = {
 
             const channelId = (typeof YOUTUBE_CHANNEL_ID !== 'undefined') ? YOUTUBE_CHANNEL_ID : 'UC_7AVKwm-_1DafjOzffcCoQ';
             const playlistId = `UU${channelId.slice(2)}`;
-            const ytApiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=6&key=${YOUTUBE_API_KEY}`;
+            const ytApiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=20&key=${YOUTUBE_API_KEY}`;
 
             const response = await fetch(ytApiUrl);
             if (!response.ok) throw new Error(`YouTube API returned ${response.status}`);
@@ -206,7 +206,7 @@ const App = {
                 throw new Error('Invalid feed response from YouTube');
             }
 
-            const items = data.items.map(item => {
+            let items = data.items.map(item => {
                 const snippet = item.snippet || {};
                 const resourceId = snippet.resourceId || {};
                 const videoId = resourceId.videoId || '';
@@ -221,6 +221,20 @@ const App = {
                     description: snippet.description || ''
                 };
             });
+
+            // Deduplicate videos by title to avoid showing the same video multiple times
+            const uniqueItems = [];
+            const titles = new Set();
+            for (const item of items) {
+                // Ignore "Private video" or "Deleted video"
+                if (item.title !== 'Private video' && item.title !== 'Deleted video' && !titles.has(item.title) && item.videoId) {
+                    titles.add(item.title);
+                    uniqueItems.push(item);
+                }
+            }
+            
+            // Limit to the 6 most recent unique videos
+            items = uniqueItems.slice(0, 6);
 
             localStorage.setItem('youtubeArchiveVideos', JSON.stringify(items));
             localStorage.setItem('youtubeArchiveFetchedAt', now.toString());
