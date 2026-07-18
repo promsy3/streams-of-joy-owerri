@@ -187,33 +187,36 @@ const App = {
         listEl.innerHTML = this.getLoadingSkeleton();
 
         try {
-            // Use local Vercel API endpoint for YouTube videos
-            const apiUrl = '/api/youtube';
+            // Fetch directly from YouTube API since Vercel API might not be running locally
+            if (!window.YOUTUBE_API_KEY || window.YOUTUBE_API_KEY === 'YOUR_YOUTUBE_API_KEY') {
+                throw new Error('YOUTUBE_API_KEY is missing or invalid in data.js');
+            }
 
-            const response = await fetch(apiUrl);
-            if (!response.ok) throw new Error('Network response not ok');
+            const channelId = window.YOUTUBE_CHANNEL_ID || 'UC_7AVKwm-_1DafjOzffcCoQ';
+            const playlistId = `UU${channelId.slice(2)}`;
+            const ytApiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=6&key=${window.YOUTUBE_API_KEY}`;
+
+            const response = await fetch(ytApiUrl);
+            if (!response.ok) throw new Error(`YouTube API returned ${response.status}`);
+            
             const data = await response.json();
-            
-            if (data.error) {
-                console.warn('YouTube API error or unconfigured:', data.error);
-                throw new Error(data.error);
-            }
-            
             if (!data.items || !Array.isArray(data.items)) {
-                throw new Error('Invalid feed response');
+                throw new Error('Invalid feed response from YouTube');
             }
 
-            // Limit to 6 items as requested
-            const latestSix = data.items.slice(0, 6);
+            const items = data.items.map(item => {
+                const snippet = item.snippet || {};
+                const resourceId = snippet.resourceId || {};
+                const videoId = resourceId.videoId || '';
+                const thumbnail = snippet.thumbnails?.high?.url || snippet.thumbnails?.medium?.url || snippet.thumbnails?.default?.url || '';
 
-            const items = latestSix.map(item => {
                 return {
-                    title: item.title,
-                    link: item.link,
-                    videoId: item.videoId,
-                    thumbnail: item.thumbnail,
-                    published: item.published,
-                    description: item.description || ''
+                    title: snippet.title || 'Streams of Joy Owerri service',
+                    link: videoId ? `https://www.youtube.com/watch?v=${videoId}` : 'https://www.youtube.com/@streamsofjoyowerri',
+                    videoId: videoId,
+                    thumbnail: thumbnail,
+                    published: snippet.publishedAt || '',
+                    description: snippet.description || ''
                 };
             });
 
