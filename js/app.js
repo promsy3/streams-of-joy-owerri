@@ -187,30 +187,32 @@ const App = {
         listEl.innerHTML = this.getLoadingSkeleton();
 
         try {
-            const channelId = 'UC_7AVKwm-_1DafjOzffcCoQ';
-            const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+            // Use local Vercel API endpoint for YouTube videos
+            const apiUrl = '/api/youtube';
 
             const response = await fetch(apiUrl);
             if (!response.ok) throw new Error('Network response not ok');
             const data = await response.json();
-            if (data.status !== 'ok' || !Array.isArray(data.items)) {
-                throw new Error(data.message || 'Invalid feed response');
+            
+            if (data.error) {
+                console.warn('YouTube API error or unconfigured:', data.error);
+                throw new Error(data.error);
+            }
+            
+            if (!data.items || !Array.isArray(data.items)) {
+                throw new Error('Invalid feed response');
             }
 
-            const items = data.items.map(item => {
-                // Extract video ID from the YouTube link so we can build
-                // a reliable thumbnail URL without depending on rss2json.
-                const ytId = this.getYouTubeId(item.link || item.guid || '');
-                const thumbnail = ytId
-                    ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
-                    : (item.thumbnail || '');
+            // Limit to 6 items as requested
+            const latestSix = data.items.slice(0, 6);
+
+            const items = latestSix.map(item => {
                 return {
                     title: item.title,
                     link: item.link,
-                    videoId: ytId,
-                    thumbnail,
-                    published: item.pubDate ? new Date(item.pubDate).toISOString() : '',
+                    videoId: item.videoId,
+                    thumbnail: item.thumbnail,
+                    published: item.published,
                     description: item.description || ''
                 };
             });
